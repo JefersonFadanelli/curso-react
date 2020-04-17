@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Feed from './components/Feed'
 
 export default class App extends Component {
 
@@ -7,26 +6,42 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-          feed:[
-              {id: 1, username: 'Jeferson', curtidas:333, comentarios:3},
-              {id: 2, username: 'Ariel', curtidas:105, comentarios:3},
-              {id: 3, username: 'Fadanelli', curtidas:1020, comentarios:3},
-              {id: 4, username: 'Lucas', curtidas:10, comentarios:10},
-              {id: 5, username: 'Adelar', curtidas:2, comentarios:3},
-          ]
+            email: '',
+            senha: '',
+            sexo: 'Masculino'
         };
+
+        this.trocarEmail = this.trocarEmail.bind(this);
+        this.atualizarSexo = this.atualizarSexo.bind(this);
+    }
+
+    trocarEmail(e){
+        let valorDigitado = e.target.value;
+        this.setState({email: valorDigitado});
+    }
+
+    atualizarSexo(e){
+        this.setState({sexo: e.target.value});
     }
 
     render(){
         return (
             <div>      
                 
-                {this.state.feed.map((item) => {
-                    return(
-                        <Feed id={item.id} username={item.username} 
-                        curtidas={item.curtidas} comentarios = {item.comentarios}/>
-                    );
-                })}
+                <h2>Formulario</h2>
+                Email:
+                <input type="email" name="email" value={this.state.email}
+                    onChange={this.trocarEmail}/> 
+                <br/>
+                Senha:
+                <input type="password" name="senha" value={this.state.senha}
+                    onChange={(e)=> this.setState({senha: e.target.value})}/> <br/>
+
+                Sexo:
+                <select name="sexo" value={this.state.sexo} onChange={this.atualizarSexo}>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select>
 
             </div>
         );
