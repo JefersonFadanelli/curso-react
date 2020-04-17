@@ -1,55 +1,47 @@
 import React, { Component } from 'react';
 
+
+import './estilos.css';
+
 export default class App extends Component {
 
     constructor(props){
         super(props);
 
         this.state = {
-            form:{
-                email: '',
-                senha: '',
-                sexo: 'masculino'
-            }
+            textoFrase: ''
         };
 
-        this.cadastrar = this.cadastrar.bind(this);
-        this.dadosForm = this.dadosForm.bind(this);
+        this.frases = [ 'Frase 1', 'Frase 2', 'Frase 3'];
+
+        this.quebraBiscoito = this.quebraBiscoito.bind(this);
+
     }
 
-    cadastrar(){
-        const { email, senha } = this.state.form;
-        alert( senha );
-    }
-
-    dadosForm(e){
-        let form = this.state.form;
-        form[e.target.name] = e.target.value;
-        this.setState({form: form});
+    quebraBiscoito(){
+        let state = this.state;
+        let numeroAleatorio = Math.floor(Math.random() * this.frases.length);
+        state.textoFrase = this.frases[numeroAleatorio];
+        this.setState(state);
     }
 
     render(){
         return (
-            <div>      
-                <h2>Novo Usuario</h2>
-                <form onSubmit={this.cadastrar}>
-                    <label>Email:</label>
-                    <input type="email" name="email" value={this.state.email}
-                        onChange={this.dadosForm}/> 
-                    <br/>
-                    <label>Senha:</label>
-                    <input type="password" name="senha" value={this.state.senha}
-                        onChange={this.dadosForm}/> <br/>
-
-                    <label>Sexo:</label>
-                    <select name="sexo" value={this.state.sexo} onChange={this.dadosForm}>
-                        <option value="masculino">Masculino</option>
-                        <option value="feminino">Feminino</option>
-                    </select>
-                    <br/>
-                    <button type="submit">Cadastrar</button>
-                </form>
+            <div className="container">      
+                <img src={require('./assets/biscoito.jpg')} className="img"/>
+                <Botao acaoBtn={this.quebraBiscoito}/>
+                <h3 className="frase">{this.state.textoFrase}</h3>
             </div>
+        );
+    }
+}
+
+class Botao extends Component{
+    render(){
+        return(
+        <div>
+            <button onClick={this.props.acaoBtn}>Abrir Biscoito</button>
+        </div>
         );
     }
 }
