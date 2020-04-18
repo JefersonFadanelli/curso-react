@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import Header from './components/Header';
-import Routes from './routes';
-
-import './estilos.css';
-
-export default class App extends Component {
+export default class Sobre extends Component {
 
     constructor(props){
         super(props);
@@ -19,7 +15,8 @@ export default class App extends Component {
     render(){
         return (
             <div>      
-                <Routes/>
+                <h2>Sobre</h2><br/>
+                <Link to="/"> Voltar para Home </Link>
             </div>
         );
     }
